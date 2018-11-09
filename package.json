@@ -26,7 +26,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && rm -rf docs && mv build docs",
     "test": "react-scripts test",
     "flow": "flow --quiet",
     "eslint": "eslint --cache --cache-location 'misc/.eslintcache' src/",
