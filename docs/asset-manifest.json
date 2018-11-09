@@ -1,13 +1,13 @@
 {
   "main.css": "/svg-editor/static/css/main.f72380a6.chunk.css",
-  "main.js": "/svg-editor/static/js/main.0fb8cfdb.chunk.js",
-  "main.js.map": "/svg-editor/static/js/main.0fb8cfdb.chunk.js.map",
+  "main.js": "/svg-editor/static/js/main.caab91d3.chunk.js",
+  "main.js.map": "/svg-editor/static/js/main.caab91d3.chunk.js.map",
   "static/js/1.b1d96340.chunk.js": "/svg-editor/static/js/1.b1d96340.chunk.js",
   "static/js/1.b1d96340.chunk.js.map": "/svg-editor/static/js/1.b1d96340.chunk.js.map",
   "runtime~main.js": "/svg-editor/static/js/runtime~main.59f6a145.js",
   "runtime~main.js.map": "/svg-editor/static/js/runtime~main.59f6a145.js.map",
   "static/css/main.f72380a6.chunk.css.map": "/svg-editor/static/css/main.f72380a6.chunk.css.map",
   "index.html": "/svg-editor/index.html",
-  "precache-manifest.79d8be62992dea80dc1953da355d9bc5.js": "/svg-editor/precache-manifest.79d8be62992dea80dc1953da355d9bc5.js",
+  "precache-manifest.a51ce20adec1cafff2b374932a0bacfc.js": "/svg-editor/precache-manifest.a51ce20adec1cafff2b374932a0bacfc.js",
   "service-worker.js": "/svg-editor/service-worker.js"
 }
