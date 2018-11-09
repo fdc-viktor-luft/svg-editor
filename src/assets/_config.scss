@@ -1,0 +1,53 @@
+.config {
+  margin: 1em;
+  .attributes {
+    border: 1px solid white;
+    padding: 0.25em 0.5em 0.25em 0.25em;
+    margin-bottom: 0.5em;
+  }
+  .commands {
+    text-align: center;
+    .command {
+      padding: 0.25em;
+      background-color: #b8860f;
+      border-radius: 0.5em;
+      margin-bottom: 0.25em;
+      &.active {
+        background-color: #21b83b;
+      }
+      button {
+        float: right;
+      }
+    }
+  }
+  .controls {
+    width: 100%;
+    input {
+      width: 100%;
+      margin-bottom: 0.5em;
+    }
+    select {
+      display: block;
+      margin-bottom: 0.5em;
+    }
+    .point-picker {
+      padding: 0.25em 0.5em 0.25em 0.25em;
+      margin-bottom: 0.5em;
+      &.active {
+        border: 2px solid darkgreen;
+      }
+      label {
+        display: block;
+      }
+      input {
+        width: 3em;
+      }
+    }
+  }
+  .buttons {
+    margin-bottom: 2em;
+  }
+  .svg-name {
+    margin-left: 3em;
+  }
+}

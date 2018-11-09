@@ -1,0 +1,17 @@
+.result {
+  box-shadow: 4px 4px 4px black;
+  background-color: white;
+  color: black;
+  padding: 1em;
+  margin-bottom: 1em;
+  overflow-x: scroll;
+  white-space: nowrap;
+  code {
+    .tab {
+      padding-left: 1em;
+      &.path {
+        padding-left: 4.5em;
+      }
+    }
+  }
+}

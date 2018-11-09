@@ -1,0 +1,16 @@
+.screen {
+  display: inline-block;
+  margin-bottom: 1em;
+  @media screen and (orientation: landscape) {
+    width: 95vh;
+  }
+  @media screen and (orientation: portrait) {
+    width: 100%;
+  }
+  .screen-bg {
+    box-shadow: 4px 4px 4px black;
+    background-color: white;
+    color: #373737;
+    width: 100%;
+  }
+}

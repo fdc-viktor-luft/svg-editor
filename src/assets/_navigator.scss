@@ -1,0 +1,84 @@
+@keyframes open {
+  0% { right: calc(-100vw + 95vh + 2.5em) }
+  100% { right: 0 }
+}
+@keyframes close {
+  0% { right: 0 }
+  100% { right: calc(-100vw + 95vh + 2.5em) }
+}
+@media screen and (orientation: portrait) {
+  @keyframes open {
+    0% { bottom: calc(-100vh + 100vw + 1.5em) }
+    100% { bottom: 0 }
+  }
+  @keyframes close {
+    0% { bottom: 0 }
+    100% { bottom: calc(-100vh + 100vw + 1.5em) }
+  }
+}
+
+.navigator {
+  position: fixed;
+  z-index: 1;
+  min-width: 10em;
+  min-height: 10em;
+  background-color: #2f2f2f;
+  box-shadow: -4px -4px 4px black;
+  overflow-y: auto;
+  animation: close 0.5s ease-in-out;
+  .visibility-toggle {
+    position: fixed;
+    width: 2em;
+    left: 0.5em;
+    top: 0.5em;
+    background-color: black;
+    border-radius: 0.5em;
+    padding: 0.5em;
+  }
+  @media screen and (orientation: landscape) {
+    width: calc(100% - 95vh - 3em);
+    height: 100%;
+    right: -100vw;
+    top: 0;
+    .visibility-toggle {
+      transform: rotate(-90deg);
+      left: unset;
+      right: 0.5em;
+    }
+  }
+  @media screen and (orientation: portrait) {
+    height: calc(100% - 100vw - 2em);
+    width: 100%;
+    bottom: -100vh;
+    left: 0;
+    .visibility-toggle {
+      top: unset;
+      bottom: 0.5em;
+    }
+  }
+  &.open {
+    animation: open 0.5s ease-in-out;
+    .visibility-toggle {
+      position: absolute;
+      width: 2em;
+      left: 0.5em;
+      top: 0.5em;
+    }
+    @media screen and (orientation: landscape) {
+      width: calc(100% - 95vh - 3em);
+      height: 100%;
+      right: 0;
+      top: 0;
+      .visibility-toggle { transform: rotate(90deg) }
+    }
+    @media screen and (orientation: portrait) {
+      height: calc(100% - 100vw - 2em);
+      width: 100%;
+      bottom: 0;
+      left: 0;
+      .visibility-toggle { transform: rotate(180deg) }
+    }
+  }
+}
+
+

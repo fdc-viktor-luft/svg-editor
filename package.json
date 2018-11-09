@@ -1,0 +1,52 @@
+{
+  "name": "svg-editor",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Life editor for SVG",
+  "keywords": [
+    "svg",
+    "editor"
+  ],
+  "license": "MIT",
+  "author": "Viktor Luft <viktor.luft@freiheit.com> (https://github.com/fdc-viktor-luft)",
+  "homepage": "https://fdc-viktor-luft.github.io/svg-editor/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fdc-viktor-luft/svg-editor"
+  },
+  "bugs": {
+    "url": "https://github.com/fdc-viktor-luft/svg-editor/issues"
+  },
+  "dependencies": {
+    "persistore": "^1.2.0",
+    "react": "^16.6.0",
+    "react-dom": "^16.6.0",
+    "react-rewired": "^0.5.3",
+    "react-scripts": "2.0.5"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "flow": "flow --quiet",
+    "eslint": "eslint --cache --cache-location 'misc/.eslintcache' src/",
+    "prettier": "prettier --config .prettierrc --write 'src/**/*.js'"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "devDependencies": {
+    "eslint-config-prettier": "^3.1.0",
+    "eslint-plugin-flowtype": "^3.1.1",
+    "eslint-plugin-prettier": "^3.0.0",
+    "flow-bin": "^0.84.0",
+    "node-sass": "^4.9.4",
+    "prettier": "^1.14.3"
+  }
+}

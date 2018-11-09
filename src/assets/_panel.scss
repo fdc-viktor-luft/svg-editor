@@ -1,0 +1,14 @@
+.fly-panel {
+  position: fixed;
+  z-index: 2;
+  min-width: 3em;
+  min-height: 3em;
+  border-radius: 0.5em;
+  background-color: #2f2f2f;
+  box-shadow: 4px 4px 4px black;
+  border: 1px solid #e7e7e7;
+  padding: 1em;
+  top: var(--fly-panel-top);
+  left: var(--fly-panel-left);
+  right: var(--fly-panel-right);
+}
