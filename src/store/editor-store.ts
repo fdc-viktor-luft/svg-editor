@@ -1,8 +1,6 @@
-// @flow
-
 import { Persistore } from 'persistore';
-import { SVG, type Command, type Point, type CommandLetter } from '../logic';
-import { Store, type SvgInfo, type EditorState, type SvgAttributes, initialEditorState } from './store';
+import { SVG, Command, Point, CommandLetter } from '../logic';
+import { Store, SvgInfo, EditorState, initialEditorState } from './store';
 import { SvgStore } from './svg-store';
 import { Util } from '../util/Util';
 
@@ -22,33 +20,28 @@ const get = (): EditorState => {
     }
 };
 
-const persist = () => Persistore.set(_key, JSON.stringify(Store.data.editor));
+const persist = () => Persistore.set(_key, JSON.stringify(Store.get().editor));
 
-type SetParams = {
-    svg?: {
-        name?: string,
-        attr?: $Shape<SvgAttributes>,
-        path?: string,
-    },
-    commands?: Command[],
-    aCommand?: number,
-    aPoint?: number,
-    oPoint?: Point,
-    edit?: boolean,
+const set = (stateChanges: Partial<EditorState>): void => {
+    Store.set(({ editor }) => ({
+        editor: {
+            ...editor,
+            ...stateChanges,
+            ...(stateChanges.commands
+                ? { svg: { ...editor.svg, ...stateChanges.svg, path: SVG.commandsToString(stateChanges.commands) } }
+                : {}),
+        },
+    }));
+    persist();
 };
 
-const calculateStateChanges = (provided: SetParams) =>
-    provided.commands
-        ? { ...provided, svg: { ...provided.svg, path: SVG.commandsToString(provided.commands) } }
-        : provided;
-
-const set = (stateChanges: SetParams): void => {
-    Store.set({ editor: calculateStateChanges(stateChanges) });
+const setSvg = (stateChanges: Partial<SvgInfo>): void => {
+    Store.set(({ editor }) => ({ editor: { ...editor, svg: { ...editor.svg, ...stateChanges } } }));
     persist();
 };
 
 const addCommand = (letter: CommandLetter): void => {
-    const { commands } = Store.data.editor;
+    const { commands } = Store.get().editor;
     set({
         aPoint: 0,
         commands: [
@@ -60,7 +53,7 @@ const addCommand = (letter: CommandLetter): void => {
 };
 
 const removeCommand = (cIndex: number): void => {
-    const { commands, aCommand } = Store.data.editor;
+    const { commands, aCommand } = Store.get().editor;
     if (cIndex < commands.length && cIndex > 0) {
         const currentlySelected = cIndex === aCommand;
         if (currentlySelected) activateCommand(cIndex - 1);
@@ -71,7 +64,7 @@ const removeCommand = (cIndex: number): void => {
 };
 
 const activateCommand = (aCommand: number): void => {
-    const { commands } = Store.data.editor;
+    const { commands } = Store.get().editor;
     if (aCommand < commands.length) {
         const oPoint = aCommand > 0 ? SVG.currentPointer(commands.slice(0, aCommand)) : undefined;
         set({ aCommand, oPoint, aPoint: 0 });
@@ -79,19 +72,19 @@ const activateCommand = (aCommand: number): void => {
 };
 
 const updateValue = (value: number, vIndex: number = 0): void => {
-    const { commands, aCommand } = Store.data.editor;
+    const { commands, aCommand } = Store.get().editor;
     const command = commands[aCommand];
     updateCommand({ ...command, values: Util.nextArray(command.values, vIndex, value) });
 };
 
 const updatePoint = (point: Point): void => {
-    const { commands, aPoint, aCommand } = Store.data.editor;
+    const { commands, aPoint, aCommand } = Store.get().editor;
     const command = commands[aCommand];
     updateCommand({ ...command, points: Util.nextArray(command.points, aPoint, point) });
 };
 
 const updateCommand = (command: Command) => {
-    const { commands, aCommand } = Store.data.editor;
+    const { commands, aCommand } = Store.get().editor;
     set({ commands: Util.nextArray(commands, aCommand, command) });
 };
 
@@ -112,7 +105,7 @@ const select = (svg: SvgInfo, index?: number) => {
 
 const clear = () => {
     Persistore.remove(_key);
-    Store.set({ editor: { edit: false } });
+    Store.set(({ editor }) => ({ editor: { ...editor, edit: false } }));
     SvgStore.setCurrent(undefined);
 };
 
@@ -121,6 +114,7 @@ Store.set({ editor: get() });
 export const EditorStore = {
     get,
     set,
+    setSvg,
     clear,
     select,
     updatePoint,

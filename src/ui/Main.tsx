@@ -1,5 +1,3 @@
-// @flow
-
 import React from 'react';
 import { StoredSvgList } from './svg/StoredSvgList';
 import { Editor } from './editor/Editor';

@@ -3,7 +3,6 @@
  *
  * The LICENSE file can be found in the root directory of this project.
  *
- * @flow
  */
 
 import { SVG } from './index';
@@ -16,14 +15,28 @@ describe('SVG', () => {
         expect(SVG.parsePath(examplePath)).toEqual([
             { letter: 'M', points: [{ x: 29.375, y: 67 }], values: [] },
             { letter: 'L', points: [{ x: 0, y: 20 }], values: [] },
-            { letter: 'Q', points: [{ x: 35, y: -6 }, { x: 69, y: 4.9 }], values: [] },
+            {
+                letter: 'Q',
+                points: [
+                    { x: 35, y: -6 },
+                    { x: 69, y: 4.9 },
+                ],
+                values: [],
+            },
             { letter: 'z', points: [], values: [] },
             { letter: 'M', points: [{ x: 25, y: 84.2 }], values: [] },
             { letter: 'L', points: [{ x: 80, y: 0 }], values: [] },
             { letter: 'M', points: [{ x: 36.25, y: 78 }], values: [] },
             { letter: 'L', points: [{ x: 50, y: 100 }], values: [] },
             { letter: 'L', points: [{ x: 100, y: 20 }], values: [] },
-            { letter: 'Q', points: [{ x: 95, y: 15 }, { x: 81.2, y: 9.2 }], values: [] },
+            {
+                letter: 'Q',
+                points: [
+                    { x: 95, y: 15 },
+                    { x: 81.2, y: 9.2 },
+                ],
+                values: [],
+            },
             { letter: 'z', points: [], values: [] },
         ]);
     });

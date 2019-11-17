@@ -1,9 +1,7 @@
-// @flow
-
 import React from 'react';
-import { Store, type EditorState, type SvgStroke } from '../../store/store';
+import { Store, EditorState, SvgStroke } from '../../store/store';
 
-type ResultProps = {| editor: EditorState |};
+type ResultProps = { editor: EditorState };
 
 const fillString = (fill: boolean) => `fill="${fill ? 'currentColor' : 'none'}"`;
 const attributeString = (name: string, value?: number | string): string => (value ? ` ${name}="${value}"` : '');
@@ -35,4 +33,4 @@ export const ResultContainer = ({ editor }: ResultProps) => {
     );
 };
 
-export const Result = Store.wire(ResultContainer, ({ editor }) => ({ editor }));
+export const Result = Store.wire<any, any>(ResultContainer, ({ editor }) => ({ editor }));

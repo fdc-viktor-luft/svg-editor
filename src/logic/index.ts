@@ -3,12 +3,11 @@
  *
  * The LICENSE file can be found in the root directory of this project.
  *
- * @flow
  */
 
 import { Util } from '../util/Util';
 
-export type Point = { x: number, y: number };
+export type Point = { x: number; y: number };
 
 /**
  * Listing of all available supported commands:
@@ -48,11 +47,14 @@ export type CommandLetter =
     | 'v'
     | 'H'
     | 'h';
-export type Command = { letter: CommandLetter, points: Point[], values: number[] };
+export type Command = { letter: CommandLetter; points: Point[]; values: number[] };
 
-const parsePoints = (numbers: number[]) => (_, index: number) => ({ x: numbers[2 * index], y: numbers[2 * index + 1] });
+const parsePoints = (numbers: number[]) => (_: any, index: number) => ({
+    x: numbers[2 * index],
+    y: numbers[2 * index + 1],
+});
 const parseSpecifiedCommand = (command: string, points: number, values: number) => {
-    const letter: CommandLetter = (command[0]: any);
+    const letter: CommandLetter = command[0] as any;
     const numbers = command
         .substr(1)
         .replace(/[-]+/g, ' -')
@@ -77,8 +79,8 @@ const requiredValuesForCommand = (command: CommandLetter): number => {
     return 0;
 };
 
-const parseCommand = (command: string): Command | void => {
-    const letter: CommandLetter = (command[0]: any);
+const parseCommand = (command: string): Command | undefined => {
+    const letter: CommandLetter = command[0] as any;
     return parseSpecifiedCommand(command, requiredPointsForCommand(letter), requiredValuesForCommand(letter));
 };
 
@@ -100,7 +102,8 @@ const commandToString = (command: Command): string =>
 
 const commandsToString = (commands: Command[]): string => commands.map(commandToString).join('');
 
-const parsePath = (path: string) => (path.match(/([a-zA-Z][ \-.0-9]*)/g) || []).map(parseCommand).filter(Boolean);
+const parsePath = (path: string): Command[] =>
+    (path.match(/([a-zA-Z][ \-.0-9]*)/g) || []).map(parseCommand).filter(Boolean) as any;
 
 const pointTransition = (x: number, y: number) => (point: Point): Point => ({ x: point.x + x, y: point.y + y });
 
@@ -145,19 +148,19 @@ const scale = (path: string, from: number, to: number, precision: number = 0): s
 const currentPointer = (commands: Command[]): Point => {
     // helper constants
     const gone = { x: 0, y: 0 };
-    const found = { x: undefined, y: undefined };
+    const found = { x: undefined as undefined | number, y: undefined as undefined | number };
     let zFound = false;
     // helper functions
-    const setFound = ({ x, y }: $Shape<Point>) => {
+    const setFound = ({ x, y }: Partial<Point>) => {
         if (x !== undefined && found.x === undefined) found.x = x + gone.x;
         if (y !== undefined && found.y === undefined) found.y = y + gone.y;
     };
     const pointFound = (): boolean => found.x !== undefined && found.y !== undefined;
-    const setGone = ({ x, y }: $Shape<Point>) => {
+    const setGone = ({ x, y }: Partial<Point>) => {
         if (x !== undefined) gone.x = x;
         if (y !== undefined) gone.y = y;
     };
-    const addGone = ({ x, y }: $Shape<Point>) => {
+    const addGone = ({ x, y }: Partial<Point>) => {
         if (x !== undefined) gone.x += x;
         if (y !== undefined) gone.y += y;
     };
@@ -203,5 +206,3 @@ export const SVG = {
     requiredValuesForCommand,
     commandToString,
 };
-
-window.SVG = SVG;

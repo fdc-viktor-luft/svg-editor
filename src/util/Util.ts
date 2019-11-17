@@ -1,8 +1,6 @@
-// @flow
-
 const classNames = (...classes: any[]): string => classes.filter((clazz?: string) => Boolean(clazz)).join(' ');
 
-const array = (num: number): Array<void> => Array.apply(null, ({ length: num }: any));
+const array = (num: number): Array<undefined> => Array(num).fill(undefined);
 
 const nextArray = <T>(before: T[], index: number, value: T): T[] => [
     ...before.slice(0, index),

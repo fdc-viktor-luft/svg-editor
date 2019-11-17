@@ -1,10 +1,8 @@
-// @flow
-
 import React, { Component } from 'react';
-import { Store, type SvgInfo } from '../../store/store';
+import { Store, SvgInfo } from '../../store/store';
 import { StoredSvg } from './StoredSvg';
 
-type StoredSvgListProps = {| svgList: SvgInfo[] |};
+type StoredSvgListProps = { svgList: SvgInfo[] };
 
 export class StoredSvgListContainer extends Component<StoredSvgListProps> {
     render() {
@@ -20,4 +18,4 @@ export class StoredSvgListContainer extends Component<StoredSvgListProps> {
     }
 }
 
-export const StoredSvgList = Store.wire(StoredSvgListContainer, ({ svgList }) => ({ svgList }));
+export const StoredSvgList = Store.wire<any, any>(StoredSvgListContainer, ({ svgList }) => ({ svgList }));

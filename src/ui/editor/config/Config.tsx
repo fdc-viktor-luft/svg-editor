@@ -1,17 +1,15 @@
-// @flow
-
 import React, { Component } from 'react';
 import { EventUtil } from '../../../util/event-util';
-import { Store, type EditorState } from '../../../store/store';
+import { Store, EditorState } from '../../../store/store';
 import { EditorStore } from '../../../store/editor-store';
 import { SvgStore } from '../../../store/svg-store';
 import { AttributesConfig } from './AttributesConfig';
 import { CommandConfig } from './CommandConfig';
 
-type ConfigProps = {| editor: EditorState |};
+type ConfigProps = { editor: EditorState };
 
 export class ConfigContainer extends Component<ConfigProps> {
-    onChangeName = (name: string) => EditorStore.set({ svg: { name } });
+    onChangeName = (name: string) => EditorStore.setSvg({ name });
 
     onSubmit = () => {
         const { editor } = this.props;
@@ -48,4 +46,4 @@ export class ConfigContainer extends Component<ConfigProps> {
     }
 }
 
-export const Config = Store.wire(ConfigContainer, ({ editor }) => ({ editor }));
+export const Config = Store.wire<any, any>(ConfigContainer, ({ editor }) => ({ editor }));

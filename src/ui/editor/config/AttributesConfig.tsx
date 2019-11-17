@@ -1,15 +1,13 @@
-// @flow
-
 import React, { Component } from 'react';
 import { EventUtil } from '../../../util/event-util';
 import {
     Store,
-    type SvgAttributes,
-    type SvgStroke,
+    SvgAttributes,
+    SvgStroke,
     StrokeLinecaps,
     StrokeLinejoins,
-    type StrokeLinejoin,
-    type StrokeLinecap,
+    StrokeLinejoin,
+    StrokeLinecap,
 } from '../../../store/store';
 import { EditorStore } from '../../../store/editor-store';
 import { Select, toSelectOptions } from '../../../form/select';
@@ -17,16 +15,16 @@ import { Select, toSelectOptions } from '../../../form/select';
 const StrokeLinecapOptions = toSelectOptions(StrokeLinecaps, 'Linecap...');
 const StrokeLinejoinOptions = toSelectOptions(StrokeLinejoins, 'Linejoin...');
 
-type AttributesConfigProps = {| attr: SvgAttributes |};
+type AttributesConfigProps = { attr: SvgAttributes };
 
 export class AttributesConfigContainer extends Component<AttributesConfigProps> {
-    onChangeSvgAttributes = (attrChanges: $Shape<SvgAttributes>) => {
-        EditorStore.set({ svg: { attr: { ...attrChanges } } });
+    onChangeSvgAttributes = (attrChanges: Partial<SvgAttributes>) => {
+        EditorStore.setSvg({ attr: { ...this.props.attr, ...attrChanges } });
     };
     onChangeWidth = (width?: number) => width && width > 0 && this.onChangeSvgAttributes({ width });
     onChangeHeight = (height?: number) => height && height > 0 && this.onChangeSvgAttributes({ height });
-    onChangeFill = (fill: boolean) => this.onChangeSvgAttributes({ fill });
-    onChooseStroke = (strokeChosen: boolean) => this.onChangeSvgAttributes({ stroke: strokeChosen ? {} : undefined });
+    onToggleFill = () => this.onChangeSvgAttributes({ fill: !this.props.attr.fill });
+    onToggleStroke = () => this.onChangeSvgAttributes({ stroke: !this.props.attr.stroke ? {} : undefined });
     onChangeStroke = (stroke: SvgStroke) =>
         this.onChangeSvgAttributes({ stroke: { ...this.props.attr.stroke, ...stroke } });
     onChangeStrokeWidth = (width?: number) => this.onChangeStroke({ width: width && width >= 0 ? width : undefined });
@@ -42,9 +40,9 @@ export class AttributesConfigContainer extends Component<AttributesConfigProps> 
                 <label>Height</label>
                 <input type="number" value={height} onChange={EventUtil.inputHandler(this.onChangeHeight)} />
                 <label>Fill</label>
-                <input type="checkbox" checked={fill} onChange={() => this.onChangeFill(!fill)} />
+                <input type="checkbox" checked={fill} onChange={this.onToggleFill} />
                 <label>Stroke</label>
-                <input type="checkbox" checked={!!stroke} onChange={() => this.onChooseStroke(!stroke)} />
+                <input type="checkbox" checked={!!stroke} onChange={this.onToggleStroke} />
                 {stroke && (
                     <>
                         <label>Stroke-Width</label>
@@ -72,4 +70,6 @@ export class AttributesConfigContainer extends Component<AttributesConfigProps> 
     }
 }
 
-export const AttributesConfig = Store.wire(AttributesConfigContainer, ({ editor }) => ({ attr: editor.svg.attr }));
+export const AttributesConfig = Store.wire<any, any>(AttributesConfigContainer, ({ editor }) => ({
+    attr: editor.svg.attr,
+}));

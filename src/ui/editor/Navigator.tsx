@@ -1,12 +1,10 @@
-// @flow
-
 import React, { Component } from 'react';
-import { Store, type EditorState } from '../../store/store';
+import { Store, EditorState } from '../../store/store';
 import { Config } from './config/Config';
 import { Icon } from '../icons/Icon';
 import { Util } from '../../util/Util';
 
-type NavigatorProps = {| editor: EditorState |};
+type NavigatorProps = { editor: EditorState };
 type NavigatorState = { open: boolean };
 
 export class NavigatorContainer extends Component<NavigatorProps, NavigatorState> {
@@ -30,4 +28,4 @@ export class NavigatorContainer extends Component<NavigatorProps, NavigatorState
     }
 }
 
-export const Navigator = Store.wire(NavigatorContainer, ({ editor }) => ({ editor }));
+export const Navigator = Store.wire<any, any>(NavigatorContainer, ({ editor }) => ({ editor }));

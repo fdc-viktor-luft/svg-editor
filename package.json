@@ -18,35 +18,43 @@
     "url": "https://github.com/fdc-viktor-luft/svg-editor/issues"
   },
   "dependencies": {
-    "persistore": "^1.2.0",
-    "react": "^16.6.0",
-    "react-dom": "^16.6.0",
-    "react-rewired": "^0.5.3",
-    "react-scripts": "2.0.5"
+    "@material-ui/core": "^4.6.1",
+    "persistore": "^1.7.0",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-rewired": "^3.0.2",
+    "react-scripts": "^3.2.0",
+    "react-use-sub": "^0.1.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build && rm -rf docs && mv build docs",
     "test": "react-scripts test",
-    "flow": "flow --quiet",
-    "eslint": "eslint --cache --cache-location 'misc/.eslintcache' src/",
-    "prettier": "prettier --config .prettierrc --write 'src/**/*.js'"
+    "eslint": "eslint --cache --cache-location 'misc/.eslintcache' --ext .ts,.tsx src/",
+    "prettier": "prettier --config .prettierrc --write src/**/*.ts src/**/*.tsx"
   },
-  "eslintConfig": {
-    "extends": "react-app"
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not ie <= 11",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ],
   "devDependencies": {
-    "eslint-config-prettier": "^3.1.0",
-    "eslint-plugin-flowtype": "^3.1.1",
-    "eslint-plugin-prettier": "^3.0.0",
-    "flow-bin": "^0.84.0",
-    "node-sass": "^4.9.4",
-    "prettier": "^1.14.3"
+    "@types/jest": "^24.0.23",
+    "@types/node": "^12.12.8",
+    "@types/react": "^16.9.11",
+    "@types/react-dom": "^16.9.4",
+    "eslint-config-prettier": "^6.6.0",
+    "eslint-plugin-prettier": "^3.1.1",
+    "node-sass": "^4.13.0",
+    "prettier": "^1.19.1",
+    "typescript": "^3.7.2"
   }
 }

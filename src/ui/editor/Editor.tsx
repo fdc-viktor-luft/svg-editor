@@ -1,12 +1,10 @@
-// @flow
-
 import React, { Component } from 'react';
-import { Store, type EditorState, initialSvgInfo } from '../../store/store';
+import { Store, EditorState, initialSvgInfo } from '../../store/store';
 import { Screen } from './Screen';
 import { Result } from './Result';
 import { EditorStore } from '../../store/editor-store';
 
-type EditorProps = {| editor: EditorState |};
+type EditorProps = { editor: EditorState };
 
 export class EditorContainer extends Component<EditorProps> {
     createNew = () => EditorStore.select(initialSvgInfo);
@@ -29,4 +27,4 @@ export class EditorContainer extends Component<EditorProps> {
     }
 }
 
-export const Editor = Store.wire(EditorContainer, ({ editor }) => ({ editor }));
+export const Editor = Store.wire<any, any>(EditorContainer, ({ editor }) => ({ editor }));

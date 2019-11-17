@@ -1,6 +1,4 @@
-// @flow
-
-import React, { Component } from 'react';
+import React, { Component, ReactNode } from 'react';
 
 const flyPanelLeft = '--fly-panel-left';
 const flyPanelTop = '--fly-panel-top';
@@ -18,8 +16,20 @@ const adjustRight = (element: any, right: Pos) => {
     element.style.setProperty(flyPanelRight, pos(right));
 };
 
-export class FlyPanel extends Component<{ children: React$Node }> {
-    panel = React.createRef();
+export class FlyPanel extends Component<{ children: ReactNode }> {
+    componentDidMount() {
+        const panelElement: any = this.panel.current;
+        panelElement.addEventListener('touchmove', this.movePanel);
+        adjustLeftAndTop(panelElement, 'unset', 0);
+        adjustRight(panelElement, 0);
+    }
+
+    componentWillUnmount() {
+        const panelElement: any = this.panel.current;
+        panelElement.removeEventListener('touchmove', this.movePanel);
+    }
+
+    panel = React.createRef<HTMLDivElement>();
     onceMouved = false;
 
     setLeftAndTop = (left: number, top: number) => {
@@ -38,18 +48,6 @@ export class FlyPanel extends Component<{ children: React$Node }> {
         event.preventDefault();
         this.setLeftAndTop(lastTouch.clientX, lastTouch.clientY);
     };
-
-    componentDidMount() {
-        const panelElement: any = this.panel.current;
-        panelElement.addEventListener('touchmove', this.movePanel);
-        adjustLeftAndTop(panelElement, 'unset', 0);
-        adjustRight(panelElement, 0);
-    }
-
-    componentWillUnmount() {
-        const panelElement: any = this.panel.current;
-        panelElement.removeEventListener('touchmove', this.movePanel);
-    }
 
     render() {
         return (

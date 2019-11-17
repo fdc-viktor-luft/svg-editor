@@ -1,18 +1,16 @@
-// @flow
-
 import React from 'react';
-import type { Point } from '../../logic/index';
+import { Point } from '../../logic/index';
 import { EventUtil } from '../../util/event-util';
 
-const onPointChange = (point: Point, coordinate: 'x' | 'y', onChange: Point => void): * =>
+const onPointChange = (point: Point, coordinate: 'x' | 'y', onChange: (point: Point) => void) =>
     EventUtil.inputHandler((num: number) => onChange({ ...point, [coordinate]: Number(num) }));
 
 type PointPickerProps = {
-    value: Point,
-    onChange: Point => void,
-    active: boolean,
-    onActivate: void => void,
-    color: string,
+    value: Point;
+    onChange: (point: Point) => void;
+    active: boolean;
+    onActivate: () => void;
+    color: string;
 };
 
 export const PointPicker = ({ value, onChange, active, onActivate, color }: PointPickerProps) => (

@@ -1,16 +1,14 @@
-// @flow
-
 import React, { Component } from 'react';
-import { type CommandLetter, type Point } from '../../../logic/index';
+import { CommandLetter, Point } from '../../../logic/index';
 import { Select } from '../../../form/select';
 import { Util } from '../../../util/Util';
 import { PointPicker } from '../../picker/PointPicker';
 import { PointColors } from '../../picker/points';
-import { Store, type EditorState } from '../../../store/store';
+import { Store, EditorState } from '../../../store/store';
 import { EditorStore } from '../../../store/editor-store';
 import { ValuePicker } from '../../picker/ValuePicker';
 
-const COMMANDS: Array<CommandLetter | void> = [
+const COMMANDS: Array<CommandLetter | undefined> = [
     undefined,
     'M',
     'm',
@@ -34,7 +32,7 @@ const COMMANDS: Array<CommandLetter | void> = [
 ];
 const COMMAND_OPTIONS = COMMANDS.map(c => ({ label: c === undefined ? 'Add Command...' : c, value: c }));
 
-type CommandConfigProps = {| editor: EditorState |};
+type CommandConfigProps = { editor: EditorState };
 
 export class CommandConfigContainer extends Component<CommandConfigProps> {
     onChooseCommand = (letter?: CommandLetter) => letter && EditorStore.addCommand(letter);
@@ -82,4 +80,4 @@ export class CommandConfigContainer extends Component<CommandConfigProps> {
     }
 }
 
-export const CommandConfig = Store.wire(CommandConfigContainer, ({ editor }) => ({ editor }));
+export const CommandConfig = Store.wire<any, any>(CommandConfigContainer, ({ editor }) => ({ editor }));

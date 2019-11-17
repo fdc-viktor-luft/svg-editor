@@ -1,24 +1,20 @@
-// @flow
-
 import React, { Component } from 'react';
-import { type Point, type CommandLetter } from '../../logic/index';
+import { Point, CommandLetter } from '../../logic/index';
 import { Util } from '../../util/Util';
 import { PointColors } from '../picker/points';
-import { type EditorState, Store } from '../../store/store';
+import { EditorState, Store } from '../../store/store';
 import { EditorStore } from '../../store/editor-store';
 
-type ScreenProps = {|
-    editor: EditorState,
-|};
+type ScreenProps = { editor: EditorState };
 
 const getRelativeAddition = (letter: CommandLetter, oPoint?: Point) =>
     letter.toLowerCase() === letter && oPoint ? oPoint : { x: 0, y: 0 };
 
 export class ScreenContainer extends Component<ScreenProps> {
-    screen = React.createRef();
+    screen = React.createRef<HTMLDivElement>();
 
-    getScreenBounding = (): { top: number, left: number, width: number, height: number } => {
-        const { top, left, width, height } = (this.screen.current: any).getBoundingClientRect();
+    getScreenBounding = (): { top: number; left: number; width: number; height: number } => {
+        const { top, left, width, height } = this.screen.current!.getBoundingClientRect();
         return { top, left, width, height };
     };
 
@@ -95,4 +91,4 @@ export class ScreenContainer extends Component<ScreenProps> {
     }
 }
 
-export const Screen = Store.wire(ScreenContainer, ({ editor }) => ({ editor }));
+export const Screen = Store.wire<any, any>(ScreenContainer, ({ editor }) => ({ editor }));

@@ -2,12 +2,10 @@
   "extends": [
     "react-app",
     "prettier",
-    "prettier/flowtype",
     "prettier/react"
   ],
   "plugins": [
     "prettier",
-    "flowtype"
   ],
   "rules": {
     "prettier/prettier": ["error", {
@@ -17,9 +15,21 @@
       "singleQuote": true,
       "trailingComma": "es5",
       "jsxBracketSameLine": true,
-      "parser": "flow"}],
+      "parser": "typescript"}],
+    "arrow-body-style": ["error", "as-needed"],
+    "react/sort-comp": 2,
+    "react/jsx-no-bind": "error",
+    "no-console": 2,
+    "eqeqeq": ["error", "always"],
     "no-unused-vars": 2,
     "no-duplicate-imports": 2,
-    "flowtype/require-valid-file-annotation": [2, "always"]
+    "import/no-commonjs": 2,
+    "import/no-default-export": 2
+  },
+  "settings": {
+    "react": {
+      "pragma": "React",
+      "version": "16.11.0"
+    }
   }
 }
